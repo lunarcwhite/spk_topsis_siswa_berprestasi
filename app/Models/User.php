@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Auth;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -57,5 +58,14 @@ class User extends Authenticatable
         if(Auth::check()){
             return Auth::user()->role->nama_role;
         }
+    }
+    /**
+     * Get the kelas associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function kelas(): HasOne
+    {
+        return $this->hasOne(Kelas::class, 'user_id');
     }
 }

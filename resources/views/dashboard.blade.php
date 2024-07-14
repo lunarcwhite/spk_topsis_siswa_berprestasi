@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="row column1">
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-4">
        <div class="full counter_section margin_bottom_30 yellow_bg">
           <div class="couter_icon">
              <div> 
@@ -13,53 +13,38 @@
           </div>
           <div class="counter_no">
              <div>
-                <p class="total_no">2500</p>
-                <p class="head_couter">Welcome</p>
+                <p class="total_no">{{ $siswa }}</p>
+                <p class="head_couter">Siswa</p>
              </div>
           </div>
        </div>
     </div>
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-4">
        <div class="full counter_section margin_bottom_30 blue1_bg">
           <div class="couter_icon">
              <div> 
-                <i class="fa fa-clock-o"></i>
+                <i class="fa fa-users"></i>
              </div>
           </div>
           <div class="counter_no">
              <div>
-                <p class="total_no">123.50</p>
-                <p class="head_couter">Average Time</p>
+                <p class="total_no">{{ $user }}</p>
+                <p class="head_couter">Guru</p>
              </div>
           </div>
        </div>
     </div>
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-4">
        <div class="full counter_section margin_bottom_30 green_bg">
           <div class="couter_icon">
              <div> 
-                <i class="fa fa-cloud-download"></i>
+                <i class="fa fa-map-o"></i>
              </div>
           </div>
           <div class="counter_no">
              <div>
-                <p class="total_no">1,805</p>
-                <p class="head_couter">Collections</p>
-             </div>
-          </div>
-       </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-       <div class="full counter_section margin_bottom_30 red_bg">
-          <div class="couter_icon">
-             <div> 
-                <i class="fa fa-comments-o"></i>
-             </div>
-          </div>
-          <div class="counter_no">
-             <div>
-                <p class="total_no">54</p>
-                <p class="head_couter">Comments</p>
+                <p class="total_no">{{ $kelas }}</p>
+                <p class="head_couter">Kelas</p>
              </div>
           </div>
        </div>

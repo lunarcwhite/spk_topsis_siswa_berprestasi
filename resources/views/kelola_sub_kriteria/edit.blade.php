@@ -41,7 +41,7 @@
 @push('script')
     <script>
         async function getDataSubKriteria(id) {
-            console.log(id);
+            document.getElementById('formEditKelas').reset();
             const url = `{{ url('dashboard/kelola_sub_kriteria/${id}/edit') }}`;
             try {
                 const response = await fetch(url);

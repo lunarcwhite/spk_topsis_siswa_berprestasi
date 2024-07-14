@@ -55,7 +55,30 @@ class KelolaAkunController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->except('_method', '_token');
+        if ($data['password'] != null) {
+            $request->validate([
+                'username' => 'required',
+                'email' => 'required',
+                'password' => 'min_digits:8',
+                'role_id' => 'required'
+            ]);
+            $data['password'] = bcrypt($request->password);
+        }else{
+            $request->validate([
+                'username' => 'required',
+                'email' => 'required',
+                'role_id' => 'required'
+            ]);
+            unset($data['password']);
+        }
+
+        try {
+            User::where('id', $id)->update($data);
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors('Gagal memperbarui akun!')->withInput();
+        }
+        return redirect()->back()->with('success', 'Akun berhasil diperbarui');
     }
 
     /**

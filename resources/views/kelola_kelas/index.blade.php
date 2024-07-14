@@ -16,11 +16,12 @@
                 </div>
                 <div class="table_section padding_infor_info">
                     <div class="table-responsive-sm">
-                        <table class="table table-hover" id="dataTable">
+                        <table class="table table-stripped" id="dataTable">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Kelas</th>
+                                    <th>Wali Kelas</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -29,6 +30,13 @@
                                     <tr>
                                         <td>{{ $no + 1 }}</td>
                                         <td>{{ $kelas->nama_kelas }}</td>
+                                        <td>
+                                            @if ($kelas->user_id != null)
+                                            <h6 class="text-success">{{ $kelas->user->username }}</h6>
+                                            @else
+                                                <h6 class="text-info">Belum memiliki wali kelas</h6>
+                                            @endif
+                                        </td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-warning" data-toggle="modal"

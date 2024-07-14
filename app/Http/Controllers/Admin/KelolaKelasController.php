@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kelas;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class KelolaKelasController extends Controller
@@ -14,6 +15,7 @@ class KelolaKelasController extends Controller
     public function index()
     {
         $data['kelass'] = Kelas::orderBy('nama_kelas', 'asc')->get();
+        $data['users'] = User::where('role_id', 2)->orderBy('username', 'asc')->get();
         return view('kelola_kelas.index')->with($data);
     }
 
@@ -23,13 +25,12 @@ class KelolaKelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kelas' => 'required|unique:kelas,nama_kelas'
+            'nama_kelas' => 'required|unique:kelas,nama_kelas',
+            'user_id' => 'required'
         ]);
 
         try {
-            Kelas::create([
-                'nama_kelas' => $request->nama_kelas
-            ]);
+            Kelas::create($request->input());
         } catch (\Throwable $th) {
             // dd($th->getMessage());
             return redirect()->back()->withErrors('Gagal menambah data kelas');
@@ -52,13 +53,12 @@ class KelolaKelasController extends Controller
     public function update(Request $request, String $id)
     {
         $request->validate([
-            'nama_kelas' => 'required|unique:kelas,nama_kelas'
+            'nama_kelas' => 'required',
+            'user_id' => 'required'
         ]);
 
         try {
-            Kelas::where('id', $id)->update([
-                'nama_kelas' => $request->nama_kelas
-            ]);
+            Kelas::where('id', $id)->update($request->except('_method', '_token'));
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors('Gagal memperbarui data kelas!');
         }

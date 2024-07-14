@@ -15,6 +15,15 @@
                         <input type="text" class="form-control" name="nama_kelas" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Wali Kelas</label>
+                        <select name="user_id" id="" class="form-control">
+                            <option value="">--> Pilih wali kelas <-- </option>
+                                    @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->username }}</option>
+                            @endforeach
+                        </select>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

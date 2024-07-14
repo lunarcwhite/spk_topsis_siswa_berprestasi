@@ -48,7 +48,7 @@
 
     function formConfirmationId(idForm, message) {
         var form = $(`${idForm}`);
-        console.log();
+        console.log(idForm);
         Swal.fire({
             html: `<h3>${message}</h3>`,
             icon: 'question',

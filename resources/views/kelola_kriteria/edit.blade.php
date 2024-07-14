@@ -39,7 +39,7 @@
 @push('script')
     <script>
         async function getDataKriteria(id) {
-            console.log(id);
+            document.getElementById('formEditKelas').reset();
             const url = `{{ url('dashboard/kelola_kriteria/${id}/edit') }}`;
             try {
                 const response = await fetch(url);

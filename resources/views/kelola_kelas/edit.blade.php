@@ -16,6 +16,15 @@
                         <input type="text" class="form-control" name="nama_kelas" id="nama_kelas"
                             aria-describedby="emailHelp">
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Wali Kelas</label>
+                        <select name="user_id" id="user_id" class="form-control">
+                            <option value="">--> Pilih wali kelas <-- </option>
+                                    @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->username }}</option>
+                            @endforeach
+                        </select>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -29,7 +38,7 @@
 @push('script')
     <script>
         async function getDataKelas(id) {
-            console.log(id);
+            document.getElementById('formEditKelas').reset();
             const url = `{{ url('dashboard/kelola_kelas/${id}/edit') }}`;
             try {
                 const response = await fetch(url);
@@ -39,6 +48,9 @@
 
                 const json = await response.json();
                 document.getElementById('nama_kelas').value = json.nama_kelas;
+                if (json.user_id !== null) {
+                    document.getElementById('user_id').value = json.user_id;
+                }
                 document.getElementById('formEditKelas').action = `{{ url('dashboard/kelola_kelas/${json.id}') }}`;
             } catch (error) {
                 console.error(error.message);
