@@ -32,4 +32,15 @@ class Siswa extends Model
     {
         return $this->hasMany(Penilaian::class, 'siswa_id');
     }
+
+    protected function filterSiswaPerkelas($kelas = null)
+    {
+        $query = $this->query()->orderBy('nama', 'asc');
+
+        if ($kelas) {
+            $query->where('kelas_id', $kelas);
+        }
+
+        return $query->get();
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Auth;
 
 class Kelas extends Model
 {
@@ -32,4 +33,10 @@ class Kelas extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    protected function waliKelas()
+    {
+        return $this->where('id', Auth::user()->kelas->id)->first();
+    }
+
 }

@@ -48,7 +48,7 @@
 @push('script')
     <script>
         async function getDataAkun(id) {
-            document.getElementById('formEditKelas').reset();
+            document.getElementById('formEditAkun').reset();
             const url = `{{ url('dashboard/kelola_akun/${id}/edit') }}`;
             try {
                 const response = await fetch(url);

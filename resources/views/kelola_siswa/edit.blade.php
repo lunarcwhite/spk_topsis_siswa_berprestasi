@@ -69,7 +69,7 @@
 @push('script')
     <script>
         async function getDataSiswa(id) {
-            document.getElementById('formEditKelas').reset();
+            document.getElementById('formEditSiswa').reset();
             const url = `{{ url('dashboard/kelola_siswa/${id}/edit') }}`;
             try {
                 const response = await fetch(url);

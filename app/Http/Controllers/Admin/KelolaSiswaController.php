@@ -17,14 +17,9 @@ class KelolaSiswaController extends Controller
         $query = Siswa::query()->orderBy('nama', 'asc');
 
         $data['kelass'] = Kelas::orderBy('nama_kelas', 'asc')->get();
-        if ($kelas) {
-            $query->where('kelas_id', $kelas);
-            $data['nama_kelas'] = Kelas::where('id', $kelas)->first();
-        }else{
-            $data['nama_kelas'] = null;
-        }
+        $data['nama_kelas'] = Kelas::where('id', $kelas)->first();
 
-        $data['siswas'] = $query->get();
+        $data['siswas'] = Siswa::filterSiswaPerkelas($kelas);
         return view('kelola_siswa.index')->with($data);
     }
 

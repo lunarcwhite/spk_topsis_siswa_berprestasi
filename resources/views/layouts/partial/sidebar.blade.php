@@ -37,25 +37,27 @@
                             class="fa fa-clone yellow_color"></i> <span>Perankingan</span></a>
                     <ul class="collapse list-unstyled" id="additional_page">
                         <li>
-                            <a href="profile.html">> <span>Matriks Ternormalisasi</span></a>
+                            <a href="{{ route('perankingan.perankinganTernormalisasi') }}">> <span>Matriks Ternormalisasi</span></a>
                         </li>
                         <li>
-                            <a href="project.html">> <span>Matriks Ternormalisasi Terbobot</span></a>
+                            <a href="{{ route('perankingan.perankinganTernormalisasiTerbobot') }}">> <span>Matriks Ternormalisasi Terbobot</span></a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="login.html">> <span>Solusi Ideal Positif</span></a>
                         </li>
                         <li>
                             <a href="404_error.html">> <span>Solusi Ideal Negatif</span></a>
-                        </li>
+                        </li> --}}
                         <li>
-                            <a href="404_error.html">> <span>Jarak Solusi Ideal Positif, Jarak Solusi Negatif dan Nilai
+                            <a href="{{ route('perankingan.nilaiPreferensi') }}">> <span>Jarak Solusi Ideal Positif, Jarak Solusi Negatif dan Nilai
                                     Preferensi</span></a>
                         </li>
                     </ul>
                 </li>
             @endcan
-            <li><a href="contact.html"><i class="fa fa-paper-plane red_color"></i> <span>Hasil Akhir</span></a></li>
+            @can('Kepala Sekolah')
+            <li><a href="{{ route('monitoring.hasil_akhir', $kelasPertama) }}"><i class="fa fa-paper-plane red_color"></i> <span>Hasil Akhir</span></a></li>    
+            @endcan
             @can('admin')
                 <li><a href="{{ route('kelola_akun.index') }}"><i class="fa fa-cog yellow_color"></i> <span>Kelola
                             Akun</span></a></li>

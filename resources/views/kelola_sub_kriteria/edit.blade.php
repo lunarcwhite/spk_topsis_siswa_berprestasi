@@ -12,14 +12,14 @@
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <label for="batas_atas">Batas maksamil nilai sub kriteria</label>
+                        <label for="batas_atas">Batas atas nilai sub kriteria</label>
                         <input type="number" class="form-control" name="batas_atas" id="batas_atas"
                             aria-describedby="emailHelp">
                             <input type="hidden" readonly class="form-control" name="kriteria_id" value="{{ $kriteria->id }}" id="kriteria_id"
                             aria-describedby="emailHelp">
                     </div>
                     <div class="form-group">
-                        <label for="batas_bawah">Batas minimal nilai sub kriteria</label>
+                        <label for="batas_bawah">Batas bawah nilai sub kriteria</label>
                         <input type="number" class="form-control" name="batas_bawah" id="batas_bawah"
                             aria-describedby="emailHelp">
                     </div>
@@ -41,7 +41,7 @@
 @push('script')
     <script>
         async function getDataSubKriteria(id) {
-            document.getElementById('formEditKelas').reset();
+            document.getElementById('formEditSubKriteria').reset();
             const url = `{{ url('dashboard/kelola_sub_kriteria/${id}/edit') }}`;
             try {
                 const response = await fetch(url);

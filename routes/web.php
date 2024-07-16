@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\KelolaKriteriaController;
 use App\Http\Controllers\Admin\KelolaSubKriteriaController;
 use App\Http\Controllers\Admin\KelolaAkunController;
 use App\Http\Controllers\Guru\PenilaianSiswaController;
+use App\Http\Controllers\Guru\PerankinganController;
+use App\Http\Controllers\KS\MonitoringController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +73,16 @@ Route::middleware('auth')->group(function () {
             Route::controller(PenilaianSiswaController::class)->group(function () {
                 Route::get('/penilaian_siswa', 'index')->name('penilaian_siswa.index');
                 Route::post('/penilaian_siswa', 'store')->name('penilaian_siswa.store');
+            });
+            Route::controller(PerankinganController::class)->group(function () {
+                Route::get('/perankingan_ternormalisasi', 'perankinganTernormalisasi')->name('perankingan.perankinganTernormalisasi');
+                Route::get('/perankingan_ternormalisasi_terbobot', 'perankinganTernormalisasiTerbobot')->name('perankingan.perankinganTernormalisasiTerbobot');
+                Route::get('/nilai_preferensi', 'nilaiPreferensi')->name('perankingan.nilaiPreferensi');
+            });
+        });
+        Route::middleware('role:Kepala Sekolah')->group(function () {
+            Route::controller(MonitoringController::class)->group(function () {
+                Route::get('/hasil_akhir/{kelas}', 'hasilAkhir')->name('monitoring.hasil_akhir');
             });
         });
     });

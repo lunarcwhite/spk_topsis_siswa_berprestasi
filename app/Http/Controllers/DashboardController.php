@@ -14,6 +14,7 @@ class DashboardController extends Controller
         $data['siswa'] = Siswa::all()->count();
         $data['kelas'] = Kelas::all()->count();
         $data['user'] = User::whereNot('role_id', 1)->count();
+        $data['kelasPertama'] = Kelas::first();
         return view('dashboard')->with($data);
     }
 }

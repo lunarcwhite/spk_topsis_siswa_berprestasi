@@ -11,14 +11,14 @@
                 <form action="{{ route('kelola_sub_kriteria.store') }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Batas maksamil nilai sub kriteria</label>
+                        <label for="exampleInputEmail1">Batas atas nilai sub kriteria</label>
                         <input type="number" class="form-control" name="batas_atas" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                             <input type="hidden" readonly class="form-control" name="kriteria_id" value="{{ $kriteria->id }}" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Batas minimal nilai sub kriteria</label>
+                        <label for="exampleInputEmail1">Batas bawah nilai sub kriteria</label>
                         <input type="number" class="form-control" name="batas_bawah" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
