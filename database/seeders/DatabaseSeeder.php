@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             KS_waliKelas_role::class,
             KriteriaSeeder::class,
             SubKriteriaSeeder::class,
+            KsSeeder::class,
         ]);
         Schema::enableForeignKeyConstraints();
     }

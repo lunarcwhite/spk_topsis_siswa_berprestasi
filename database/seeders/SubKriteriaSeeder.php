@@ -16,19 +16,19 @@ class SubKriteriaSeeder extends Seeder
         $data = [
             [
                 'kriteria_id' => 1,
-                'batas_atas' => 1,
-                'batas_bawah' => 2,
+                'batas_atas' => 2,
+                'batas_bawah' => 1,
                 'nilai' => 4
             ],
             [
                 'kriteria_id' => 1,
-                'batas_atas' => 3,
-                'batas_bawah' => 4,
+                'batas_atas' => 4,
+                'batas_bawah' => 3,
                 'nilai' => 3
             ],
             [
                 'kriteria_id' => 1,
-                'batas_atas' => 5,
+                'batas_atas' => 6,
                 'batas_bawah' => 5,
                 'nilai' => 2
             ],

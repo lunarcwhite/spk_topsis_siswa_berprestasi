@@ -46,4 +46,15 @@ class PerankinganController extends Controller
         // dd($data['solusiIdeal']);
         return view('perankingan.nilai_preferensi')->with($data);
     }
+    public function hasilAkhir()
+    {
+        $data['nilaiPreferensi'] = Penilaian::hitungNilaiPreferensi();
+
+        $kelas = Kelas::waliKelas();
+        $data['siswas'] = Siswa::filterSiswaPerkelas($kelas->id);
+        $data['nama_kelas'] = $kelas;
+        $data['perankingan'] = Penilaian::perankingan($kelas->id);
+        // dd($data['perankingan']);
+        return view('perankingan.hasil_akhir')->with($data);
+    }
 }

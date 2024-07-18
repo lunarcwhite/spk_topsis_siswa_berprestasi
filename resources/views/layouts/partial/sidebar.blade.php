@@ -23,6 +23,8 @@
             <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard yellow_color"></i>
                     <span>Dashboard</span></a></li>
             @can('admin')
+                <li><a href="{{ route('kelola_akun.index') }}"><i class="fa fa-cog yellow_color"></i> <span>Data
+                            Akun</span></a></li>
                 <li><a href="{{ route('kelola_kelas.index') }}"><i class="fa fa-clock-o orange_color"></i> <span>Data
                             Kelas</span></a></li>
                 <li><a href="{{ route('kelola_siswa.index') }}"><i class="fa fa-diamond purple_color"></i> <span>Data
@@ -52,15 +54,14 @@
                             <a href="{{ route('perankingan.nilaiPreferensi') }}">> <span>Jarak Solusi Ideal Positif, Jarak Solusi Negatif dan Nilai
                                     Preferensi</span></a>
                         </li>
+                        <li>
+                            <a href="{{ route('perankingan.hasil_akhir') }}">> <span>Peringkat</span></a>
+                        </li>
                     </ul>
                 </li>
             @endcan
             @can('Kepala Sekolah')
-            <li><a href="{{ route('monitoring.hasil_akhir', $kelasPertama) }}"><i class="fa fa-paper-plane red_color"></i> <span>Hasil Akhir</span></a></li>    
-            @endcan
-            @can('admin')
-                <li><a href="{{ route('kelola_akun.index') }}"><i class="fa fa-cog yellow_color"></i> <span>Kelola
-                            Akun</span></a></li>
+            <li><a href="{{ route('monitoring.hasil_akhir') }}"><i class="fa fa-paper-plane red_color"></i> <span>Hasil Akhir</span></a></li>    
             @endcan
         </ul>
     </div>

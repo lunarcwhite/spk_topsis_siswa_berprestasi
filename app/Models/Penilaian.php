@@ -44,15 +44,15 @@ class Penilaian extends Model
         
     }
 
-    protected function getSiswa($kelas = null)
+    protected function getSiswa($kelas)
     {
         return Siswa::filterSiswaPerkelas($kelas);
     }
 
-    protected function normalisasi($kelas = null)
+    protected function normalisasi($kelas)
     {
         $normalisasi = [];
-        foreach ($this->getSiswa() as $siswa) {
+        foreach ($this->getSiswa($kelas) as $siswa) {
             foreach ($this->getKriteria() as $key => $kriteria) {
                 $matrik = 0;
                 $nilai_siswa = $this->getNilai($siswa->id, $kriteria->id);
@@ -76,14 +76,14 @@ class Penilaian extends Model
     {
         return Kriteria::orderBy('kode_kriteria', 'asc')->get();
     }
-    protected function getNilai($siswa = null, $kriteria = null)
+    protected function getNilai($siswa, $kriteria)
     {
         return Penilaian::where('siswa_id', $siswa)->where('kriteria_id', $kriteria)->first();
     }
 
-    protected function matriksTernormalisasi($kelas = null)
+    protected function matriksTernormalisasi($kelas)
     {
-        $data = $this->normalisasi();
+        $data = $this->normalisasi($kelas);
         $kriteria = $this->getKriteria();
         $dump = [];
         foreach ($kriteria as $key => $value) {
@@ -101,13 +101,13 @@ class Penilaian extends Model
         return $dump;
     }
 
-    protected function hitungNilaiNormalisasi($kelas = null)
+    protected function hitungNilaiNormalisasi($kelas)
     {
-        $data = $this->matriksTernormalisasi();
+        $data = $this->matriksTernormalisasi($kelas);
         $final = [];
         $dump = [];
         foreach ($data as $key => $value) {
-            $temp = null;
+            $temp = 0;
             foreach ($value as $index => $hasil) {
                 $tambah = pow($hasil, 2);
                 $i = $temp + $tambah;
@@ -122,10 +122,10 @@ class Penilaian extends Model
         return $final;
     }
 
-    protected function menormalisasikanMatriks($kelas = null)
+    protected function menormalisasikanMatriks($kelas)
     {
-        $hasilNilaiNormalisasi = $this->hitungNilaiNormalisasi();
-        $normalisasi = $this->normalisasi();
+        $hasilNilaiNormalisasi = $this->hitungNilaiNormalisasi($kelas);
+        $normalisasi = $this->normalisasi($kelas);
         $final = [];
         foreach ($normalisasi as $key => $value) {
             $temp = [];
@@ -139,10 +139,10 @@ class Penilaian extends Model
         return $final;
     }
 
-    protected function hitungNilaiNormalisasiTerbobot($kelas = null)
+    protected function hitungNilaiNormalisasiTerbobot($kelas)
     {
         $final = [];
-        $data = $this->menormalisasikanMatriks();
+        $data = $this->menormalisasikanMatriks($kelas);
         $kriteria = $this->getKriteria();
         foreach ($data as $key => $value) {
             $temp = [];
@@ -155,9 +155,9 @@ class Penilaian extends Model
         return $final;
     }
 
-    protected function normalisasiTerbobot($kelas = null)
+    protected function normalisasiTerbobot($kelas)
     {
-        $data = $this->hitungNilaiNormalisasiTerbobot();
+        $data = $this->hitungNilaiNormalisasiTerbobot($kelas);
         $kriteria = $this->getKriteria();
         $dump = [];
         foreach ($kriteria as $key => $value) {
@@ -175,14 +175,14 @@ class Penilaian extends Model
         return $dump;
     }
 
-    protected function cariSolusiIdeal($tipe = null)
+    protected function cariSolusiIdeal($tipe, $kelas)
     {
         //tipe
         //0 berarti negatif angka pertama adalah yang terbesar sisanya yang terkecil
         //1 berarti positif angka pertama adalah yang terkecil sisanya yang terbesar
 
         $final = [];
-        $data = $this->normalisasiTerbobot();
+        $data = $this->normalisasiTerbobot($kelas);
 
         foreach ($data as $key => $value) {
             $max = max($value);
@@ -205,15 +205,15 @@ class Penilaian extends Model
         return $final;
     }
 
-    protected function hitungJarakSolusiIdeal($kelas = null)
+    protected function hitungJarakSolusiIdeal($kelas)
     {
         $final = [];
-        $positif = $this->cariSolusiIdeal(1);
-        $negatif = $this->cariSolusiIdeal(0);
-        $data = $this->hitungNilaiNormalisasiTerbobot();
+        $positif = $this->cariSolusiIdeal(1, $kelas);
+        $negatif = $this->cariSolusiIdeal(0, $kelas);
+        $data = $this->hitungNilaiNormalisasiTerbobot($kelas);
         foreach ($data as $key => $value) {
-            $idealPositif = null;
-            $idealNegatif = null;
+            $idealPositif = 0;
+            $idealNegatif = 0;
             for ($i=0; $i < count($value); $i++) { 
                 $idealPositif += pow(($positif[$i] - $value[$i]), 2);
                 $idealNegatif += pow(($negatif[$i] - $value[$i]), 2);
@@ -227,9 +227,9 @@ class Penilaian extends Model
         return $final;
     }
 
-    protected function hitungNilaiPreferensi($kelas = null)
+    protected function hitungNilaiPreferensi($kelas)
     {
-        $data = $this->hitungJarakSolusiIdeal();
+        $data = $this->hitungJarakSolusiIdeal($kelas);
         $final = [];
         foreach ($data as $key => $value) {
             $preferensi = $value[1] / ($value[0] + $value[1]);
@@ -239,7 +239,7 @@ class Penilaian extends Model
         return $final;
     }
 
-    protected function perankingan($kelas = null)
+    protected function perankingan($kelas)
     {
         $data = $this->hitungNilaiPreferensi($kelas);
         if(count($this->getSiswa($kelas)) === count($data)){
