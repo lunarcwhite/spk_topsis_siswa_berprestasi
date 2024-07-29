@@ -77,13 +77,14 @@ Route::middleware('auth')->group(function () {
             Route::controller(PerankinganController::class)->group(function () {
                 Route::get('/perankingan_ternormalisasi', 'perankinganTernormalisasi')->name('perankingan.perankinganTernormalisasi');
                 Route::get('/perankingan_ternormalisasi_terbobot', 'perankinganTernormalisasiTerbobot')->name('perankingan.perankinganTernormalisasiTerbobot');
+                Route::get('/hasil_solusi_ideal', 'hasilSolusiIdeal')->name('perankingan.hasilSolusiIdeal');
                 Route::get('/nilai_preferensi', 'nilaiPreferensi')->name('perankingan.nilaiPreferensi');
-                Route::get('/hasil_akhir', 'hasilAkhir')->name('perankingan.hasil_akhir');
+                Route::get('/hasil_akhir', 'hasilAkhir')->name('perankingan.hasilAkhir');
             });
         });
         Route::middleware('role:Kepala Sekolah')->group(function () {
             Route::controller(MonitoringController::class)->group(function () {
-                Route::get('/hasil_akhir', 'hasilAkhir')->name('monitoring.hasil_akhir');
+                Route::get('/monitor_hasil_akhir', 'hasilAkhir')->name('monitoring.hasilAkhir');
             });
         });
     });

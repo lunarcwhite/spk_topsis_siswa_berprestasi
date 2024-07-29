@@ -51,17 +51,20 @@
                             <a href="404_error.html">> <span>Solusi Ideal Negatif</span></a>
                         </li> --}}
                         <li>
+                            <a href="{{ route('perankingan.hasilSolusiIdeal') }}">> <span>Hasil Solusi Ideal Positif & Negatif</span></a>
+                        </li>
+                        <li>
                             <a href="{{ route('perankingan.nilaiPreferensi') }}">> <span>Jarak Solusi Ideal Positif, Jarak Solusi Negatif dan Nilai
                                     Preferensi</span></a>
                         </li>
                         <li>
-                            <a href="{{ route('perankingan.hasil_akhir') }}">> <span>Peringkat</span></a>
+                            <a href="{{ route('perankingan.hasilAkhir') }}">> <span>Peringkat</span></a>
                         </li>
                     </ul>
                 </li>
             @endcan
             @can('Kepala Sekolah')
-            <li><a href="{{ route('monitoring.hasil_akhir') }}"><i class="fa fa-paper-plane red_color"></i> <span>Hasil Akhir</span></a></li>    
+            <li><a href="{{ route('monitoring.hasilAkhir') }}"><i class="fa fa-paper-plane red_color"></i> <span>Hasil Akhir</span></a></li>    
             @endcan
         </ul>
     </div>

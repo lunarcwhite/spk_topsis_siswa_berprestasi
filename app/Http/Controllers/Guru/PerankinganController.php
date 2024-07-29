@@ -35,6 +35,18 @@ class PerankinganController extends Controller
         return view('perankingan.matriks_ternormalisasi_terbobot')->with($data);
     }
 
+    public function hasilSolusiIdeal()
+    {
+        $kelas = Kelas::waliKelas();
+        $idKelas = $kelas->id;
+        $data['positif'] = Penilaian::cariSolusiIdeal(1, $idKelas);
+        $data['negatif'] = Penilaian::cariSolusiIdeal(0, $idKelas);
+        $data['kriterias'] = Penilaian::getKriteria();
+        $data['kelas'] = $kelas;
+        // dd($positif);
+        return view('perankingan.hasil_solusi_ideal')->with($data);
+    }
+
     public function nilaiPreferensi()
     {
         $kelas = Kelas::waliKelas();
